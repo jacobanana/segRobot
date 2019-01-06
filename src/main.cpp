@@ -13,6 +13,7 @@
 
 #include "Arduino.h"
 #include "segment.h"
+#include "neo.h"
 
 #define N_EYES 4
 #define N_MOUTH 4
@@ -29,21 +30,55 @@ uint8_t mouths[N_MOUTH][2] ={
   {SEG_E+SEG_G, SEG_C+SEG_G}
 };
 
+uint8_t e1, e2, m, speed;
+uint16_t t1, t2;
+long now1, now2;
+
+void randomEyes(){
+  e1 = random() % N_EYES;
+  e2 = random() % N_EYES;
+  t1 = (random() % 600) + 600; // eyes drawing delay
+}
+
+void randomMouth(){
+  m = random() % N_MOUTH;
+  t2 = (random() % 600) + 100; // mouth drawing delay
+}
+
+void drawEyes(){
+  setDigit(0, eyes[e1]);
+  setDigit(3, eyes[e2]);
+  randomEyes();
+  now1 = millis();
+}
+
+void drawMouth(){
+  setDigit(1, mouths[m][0]);
+  setDigit(2, mouths[m][1]);
+  randomMouth();
+  now2 = millis();
+}
+
+
 void setup(){
-  setupDisplay();
-  brightness = 0;
+  setupDisplay(0);
+  setupPixels(255);
+
+  randomMouth();
+  randomEyes();
+  speed = 10;
 }
 
 void loop(){
-  int e1 = random() % N_EYES;
-  int e2 = random() % N_EYES;
-  int m = random() % N_MOUTH;
-  int t1 = random() % 600;
-  int t2 = random() % 600;
-  setDigit(0, eyes[e1]);
-  setDigit(3, eyes[e2]);
-  delay(t1);
-  setDigit(1, mouths[m][0]);
-  setDigit(2, mouths[m][1]);
-  delay(t2);
+  rainbow();
+
+  if (millis()-now1 >= t1){
+    drawEyes();
+  }
+
+  if (millis()-now2 >= t2){
+    drawMouth();
+  }
+
+  delay(speed);
 }

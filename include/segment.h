@@ -22,7 +22,7 @@ void setDisplayU(int v){
   }
 }
 
-void setupDisplay(){
+void setupDisplay(uint8_t b){
     // Setup Timer2 to update segment display
     noInterrupts();           // disable all interrupts
     TCCR2A = 0;
@@ -40,7 +40,8 @@ void setupDisplay(){
     for(uint8_t i=0; i<N_DIGIT; i++){
       pinMode(digits[i], OUTPUT);
     }
-    setDisplayU(255);
+    setDisplayU(0);
+    brightness = b;
 
     pinMode(13, OUTPUT);
 }
