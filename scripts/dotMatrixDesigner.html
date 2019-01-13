@@ -46,6 +46,8 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <!-- mousetrap for shortcuts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mousetrap/1.6.2/mousetrap.min.js"></script>
 
   </head>
 
@@ -151,22 +153,22 @@
 
           <div class="options">
             <div class="form-check form-check-inline">
-              <button class="btn btn-sm btn-primary" id="invert" data-toggle="tooltip" data-placement="bottom" title="Invert pattern"><i class="fas fa-adjust"></i></button>
+              <button class="btn btn-sm btn-primary" id="invert" data-toggle="tooltip" data-placement="bottom" title="Invert pattern [i]"><i class="fas fa-adjust"></i></button>
             </div>
             <div class="form-check form-check-inline">
-              <button class="btn btn-sm btn-primary" id="shiftUp" data-toggle="tooltip" data-placement="bottom" title="Shift Up"><i class="fas fa-angle-double-up"></i></button>
+              <button class="btn btn-sm btn-primary" id="shiftUp" data-toggle="tooltip" data-placement="bottom" title="Shift Up [up]"><i class="fas fa-angle-double-up"></i></button>
             </div>
             <div class="form-check form-check-inline">
-              <button class="btn btn-sm btn-primary" id="shiftDown" data-toggle="tooltip" data-placement="bottom" title="Shift Down"><i class="fas fa-angle-double-down"></i></button>
+              <button class="btn btn-sm btn-primary" id="shiftDown" data-toggle="tooltip" data-placement="bottom" title="Shift Down [down]"><i class="fas fa-angle-double-down"></i></button>
             </div>
             <div class="form-check form-check-inline">
-              <button class="btn btn-sm btn-primary" id="shiftLeft" data-toggle="tooltip" data-placement="bottom" title="Shift Left"><i class="fas fa-angle-double-left"></i></button>
+              <button class="btn btn-sm btn-primary" id="shiftLeft" data-toggle="tooltip" data-placement="bottom" title="Shift Left [left]"><i class="fas fa-angle-double-left"></i></button>
             </div>
             <div class="form-check form-check-inline">
-              <button class="btn btn-sm btn-primary" id="shiftRight" data-toggle="tooltip" data-placement="bottom" title="Shift Right"><i class="fas fa-angle-double-right"></i></button>
+              <button class="btn btn-sm btn-primary" id="shiftRight" data-toggle="tooltip" data-placement="bottom" title="Shift Right [right]"><i class="fas fa-angle-double-right"></i></button>
             </div>
             <div class="form-check form-check-inline">
-              <button class="btn btn-sm btn-primary" id="clear" data-toggle="tooltip" data-placement="bottom" title="Clear"><i class="fas fa-times"></i></button>
+              <button class="btn btn-sm btn-primary" id="clear" data-toggle="tooltip" data-placement="bottom" title="Clear [escape]"><i class="fas fa-times"></i></button>
             </div>
           </div>
 
@@ -235,12 +237,22 @@
         updatePattern();
       })
 
+
+      // Buttons
       $("#invert").click(() => { invertPattern(); })
       $("#clear").click(() => { clearPattern(); })
       $("#shiftUp").click(() => { shiftUp(); })
       $("#shiftDown").click(() => { shiftDown(); })
       $("#shiftLeft").click(() => { shiftLeft(); })
       $("#shiftRight").click(() => { shiftRight(); })
+
+      // Shortcuts
+      Mousetrap.bind('i', () => { invertPattern(); })
+      Mousetrap.bind('esc', () => { clearPattern(); })
+      Mousetrap.bind('up', () => { shiftUp(); })
+      Mousetrap.bind('down', () => { shiftDown(); })
+      Mousetrap.bind('left', () => { shiftLeft(); })
+      Mousetrap.bind('right', () => { shiftRight(); })
     });
 
     var rotate90 = function(matrix) {
