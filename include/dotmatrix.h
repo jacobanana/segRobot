@@ -7,10 +7,10 @@
 
 LedControl dot=LedControl(DOT_DATA,DOT_CLK,DOT_CS,DOT_N);
 
-uint64_t BODY = 0x734644f8f8444673;
-uint64_t LEGS = 0x7fc0809f9f80c07f;
-uint64_t P180 = 0x1d2444444444241c;
-uint64_t P270 = 0x003c428181ff0001;
+uint64_t BODY[] = {0x734644f8f8444673, 0xc04047f8f84740c0};
+uint64_t HEART[] = {0x00387c3e3e7c3800, 0x0038442222443800};
+uint64_t HEART2[] = {0xffc783c1c183c7ff, 0xffc7bbddddbbc7ff};
+uint64_t IMAGES[] = {0xffe7e78181e7e7ff, 0x980c0603060c1830, 0x010080c163361c08, 0x0c183060c0603019};
 
 void setupDots(){
   for(int address=0;address<DOT_N;address++) {

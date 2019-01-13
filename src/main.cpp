@@ -32,6 +32,7 @@ uint8_t mouths[N_MOUTH][2] ={
 };
 
 uint8_t e1, e2, m, speed;
+uint8_t body = 0;
 uint16_t t1, t2;
 long now1, now2, now3;
 
@@ -72,10 +73,11 @@ void setup(){
 }
 
 void loop(){
-  matrix(3, BODY);
-  //matrix(2, LEGS);
-  //matrix(2, P180);
-  //matrix(3, P270);
+  matrix(0, IMAGES[0]);
+  matrix(1, IMAGES[1]);
+  matrix(2, IMAGES[2]);
+  matrix(3, IMAGES[3]);
+
 
   if (millis()-now3 >= speed){
     rainbow();
@@ -84,6 +86,7 @@ void loop(){
 
   if (millis()-now1 >= t1){
     drawEyes();
+    body = (body + 1 == 2 ? 0: body + 1);
   }
 
   if (millis()-now2 >= t2){

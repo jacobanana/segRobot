@@ -3,6 +3,8 @@
 
   <!-- bootstrap css -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <!-- fontawesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
   <!-- dot matrix css -->
   <style>
@@ -11,9 +13,9 @@
       display: flex;
       flex-direction: column;
       align-items: stretch;
-      background-color: #000000;
     }
     .matrixRow {
+      background-color: #000000;
       display: flex;
       margin: auto;
       align-items: baseline;
@@ -24,7 +26,7 @@
       border-radius: 50%;
       display: inline-block;
       margin: 2px;
-      background-color: #FFFFFF;
+      background-color: #303030;
     }
     .red {
       background-color: #FF0000;
@@ -32,6 +34,11 @@
 
     .dotone {
       border: solid 6px blue;
+    }
+
+    .options {
+      padding: 10px;
+      text-align: center;
     }
   </style>
 
@@ -49,19 +56,29 @@
       <header>
         <h1>Dot Matrix Designer</h1>
       </header>
-      <main class="main">
+      <main>
         <div class="content">
-
           <div class="matrix">
             <div class="matrixRow" row="0">
-              <span class="dot dotone" id="0-deg" col="0"></span>
+              <span class="dot dotone" col="0" id="0-deg"></span>
               <span class="dot" col="1"></span>
               <span class="dot" col="2"></span>
               <span class="dot" col="3"></span>
               <span class="dot" col="4"></span>
               <span class="dot" col="5"></span>
               <span class="dot" col="6"></span>
-              <span class="dot" id="90-deg" col="7"></span>
+              <span class="dot" col="7" id="90-deg"></span>
+            </div>
+
+            <div class="matrixRow" row="1">
+              <span class="dot" col="0"></span>
+              <span class="dot" col="1"></span>
+              <span class="dot" col="2"></span>
+              <span class="dot" col="3"></span>
+              <span class="dot" col="4"></span>
+              <span class="dot" col="5"></span>
+              <span class="dot" col="6"></span>
+              <span class="dot" col="7"></span>
             </div>
 
             <div class="matrixRow" row="2">
@@ -76,17 +93,6 @@
             </div>
 
             <div class="matrixRow" row="3">
-              <span class="dot" col="0"></span>
-              <span class="dot" col="1"></span>
-              <span class="dot" col="2"></span>
-              <span class="dot" col="3"></span>
-              <span class="dot" col="4"></span>
-              <span class="dot" col="5"></span>
-              <span class="dot" col="6"></span>
-              <span class="dot" col="7"></span>
-            </div>
-
-            <div class="matrixRow" row="1">
               <span class="dot" col="0"></span>
               <span class="dot" col="1"></span>
               <span class="dot" col="2"></span>
@@ -143,42 +149,62 @@
 
           </div>
 
-        </div>
-        <div class="pattern">
-        </div>
+          <div class="options">
+            <div class="form-check form-check-inline">
+              <button class="btn btn-sm btn-primary" id="invert" data-toggle="tooltip" data-placement="bottom" title="Invert pattern"><i class="fas fa-adjust"></i></button>
+            </div>
+            <div class="form-check form-check-inline">
+              <button class="btn btn-sm btn-primary" id="shiftUp" data-toggle="tooltip" data-placement="bottom" title="Shift Up"><i class="fas fa-angle-double-up"></i></button>
+            </div>
+            <div class="form-check form-check-inline">
+              <button class="btn btn-sm btn-primary" id="shiftDown" data-toggle="tooltip" data-placement="bottom" title="Shift Down"><i class="fas fa-angle-double-down"></i></button>
+            </div>
+            <div class="form-check form-check-inline">
+              <button class="btn btn-sm btn-primary" id="shiftLeft" data-toggle="tooltip" data-placement="bottom" title="Shift Left"><i class="fas fa-angle-double-left"></i></button>
+            </div>
+            <div class="form-check form-check-inline">
+              <button class="btn btn-sm btn-primary" id="shiftRight" data-toggle="tooltip" data-placement="bottom" title="Shift Right"><i class="fas fa-angle-double-right"></i></button>
+            </div>
+            <div class="form-check form-check-inline">
+              <button class="btn btn-sm btn-primary" id="clear" data-toggle="tooltip" data-placement="bottom" title="Clear"><i class="fas fa-times"></i></button>
+            </div>
+          </div>
 
+          <div class="options">
+            <div class="form-check form-check-inline">
+              <select class="custom-select custom-select-sm" id="orientation" data-toggle="tooltip" data-placement="bottom" title="Display orientation - blue dot is LED 0,0">
+                <option value="0-deg" selected>0 degree</option>
+                <option value="90-deg">90 degree</option>
+                <option value="180-deg">180 degree</option>
+                <option value="270-deg">270 degree</option>
+              </select>
+            </div>
+
+            <div class="form-check form-check-inline">
+              <select class="custom-select custom-select-sm" id="format" data-toggle="tooltip" data-placement="bottom" title="Data format for code output">
+                <option value="uint64_t" selected>uint64_t</option>
+                <option value="byte">byte array</option>
+              </select>
+            </div>
+
+            <div class="form-check form-check-inline">
+              <input class="input input-sm" id="variable" placeholder="Variable Name" data-toggle="tooltip" data-placement="bottom" title="Variable name for code output"/>
+            </div>
+          </div>
+        </div>
 
       </main>
       <footer>
-        <div class="row">
-          <div class="form-check form-check-inline">
-            <select class="custom-select custom-select-sm" id="orientation">
-              <option value="0-deg" selected>0 degree</option>
-              <option value="90-deg">90 degree</option>
-              <option value="180-deg">180 degree</option>
-              <option value="270-deg">270 degree</option>
-            </select>
-          </div>
-
-          <div class="form-check form-check-inline">
-            <select class="custom-select custom-select-sm" id="format">
-              <option value="uint64_t" selected>uint64_t</option>
-              <option value="byte">byte array</option>
-            </select>
-          </div>
-
-          <div class="form-check form-check-inline">
-            <button class="btn btn-sm btn-primary" id="invert">Invert</button>
-          </div>
-          <div class="form-check form-check-inline">
-            <button class="btn btn-sm btn-primary" id="clear">Clear</button>
-          </div>
+        <div>
+          <pre><code class="pattern"></code></pre>
         </div>
       </footer>
     </div>
 
     <script>
-    $().button('toggle')
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
 
     $(function(){
       updatePattern();
@@ -205,18 +231,19 @@
         let value = $("#orientation").val();
         $("#"+value).addClass("dotone");
       })
-      $("select").change(() => {
+      $("select, input").change(() => {
         updatePattern();
       })
 
       $("#invert").click(() => { invertPattern(); })
       $("#clear").click(() => { clearPattern(); })
+      $("#shiftUp").click(() => { shiftUp(); })
+      $("#shiftDown").click(() => { shiftDown(); })
+      $("#shiftLeft").click(() => { shiftLeft(); })
+      $("#shiftRight").click(() => { shiftRight(); })
     });
 
     var rotate90 = function(matrix) {
-     // reverse the rows
-      matrix = matrix.reverse();
-
       // swap the symmetric elements
       for (var i = 0; i < matrix.length; i++) {
         for (var j = 0; j < i; j++) {
@@ -230,12 +257,15 @@
 
     var rotate180 = function(matrix){
       matrix = matrix.map(row => { row.reverse(); return row; })
-      matrix.reverse();
       return matrix;
     }
 
     var rotate270 = function(matrix) {
-      return rotate180(rotate90(matrix));
+      matrix = rotate180(matrix);
+      matrix = matrix.reverse();
+      matrix = rotate90(matrix);
+
+      return matrix;
     };
 
     var buildPattern = function(){
@@ -249,7 +279,7 @@
           line = [];
         }
       })
-      return pattern.reverse();
+      return pattern;
     }
 
     var updatePattern = function(){
@@ -264,20 +294,22 @@
         pattern = rotate180(pattern);
       } else if(orientation == "270-deg"){
         pattern = rotate270(pattern);
+      } else {
+        pattern = pattern.reverse();
       }
 
       if (format == "byte"){
         pattern = pattern.map(row => {
           return "B"+row.join("")
         });
-        pattern = `byte ${variable}[] = {${pattern}};`
+        pattern = `const byte ${variable}[] = {${pattern}};`
 
       } else if (format == "uint64_t") {
         pattern = pattern.map(row => {
           return parseInt(row.join(""), 2).toString(16).padStart(2, '0');
         });
         pattern = pattern.join("");
-        pattern = `uint64_t ${variable} = 0x${pattern};`
+        pattern = `const uint64_t ${variable} = 0x${pattern};`
       }
 
       $(".pattern").text(pattern);
@@ -295,6 +327,57 @@
         $(this).removeClass("red");
       })
       updatePattern();
+    }
+
+    function loadPattern(pattern){
+      clearPattern();
+      for (i = 0; i<8; i++){
+        for(j=0; j<8; j++){
+          if (pattern[i][j] == 1){
+            $(`[row=${i}] > [col=${j}]`).addClass("red");
+          }
+        }
+      }
+      updatePattern();
+    }
+
+    function shiftUp(pattern){
+      pattern = pattern || buildPattern();
+      let newPattern = []
+      for(i=0; i<7; i++){
+        newPattern.push(pattern[i+1])
+      }
+      newPattern.push([0,0,0,0,0,0,0,0]);
+      loadPattern(newPattern);
+      return newPattern;
+    }
+
+    function shiftDown(pattern){
+      pattern = pattern || buildPattern();
+      let newPattern = [[0,0,0,0,0,0,0,0]]
+      for(i=0; i<7; i++){
+        newPattern.push(pattern[i])
+      }
+      loadPattern(newPattern);
+      return newPattern;
+    }
+
+    function shiftLeft(pattern){
+      pattern = pattern || buildPattern();
+      pattern = rotate90(pattern);
+      pattern = shiftUp(pattern);
+      pattern = rotate90(pattern);
+      loadPattern(pattern)
+      return pattern;
+    }
+
+    function shiftRight(pattern){
+      pattern = pattern || buildPattern();
+      pattern = rotate90(pattern);
+      pattern = shiftDown(pattern);
+      pattern = rotate90(pattern);
+      loadPattern(pattern)
+      return pattern;
     }
     </script>
 
