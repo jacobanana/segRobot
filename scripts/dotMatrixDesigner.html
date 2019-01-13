@@ -60,7 +60,7 @@
       </header>
       <main>
         <div class="content">
-          <div class="matrix">
+          <div class="matrix" id="main">
             <div class="matrixRow" row="0">
               <span class="dot dotone" col="0" id="0-deg"></span>
               <span class="dot" col="1"></span>
@@ -204,6 +204,8 @@
     </div>
 
     <script>
+    let savedPatterns = [];
+
     $(() => {
       $('[data-toggle="tooltip"]').tooltip()
       updatePattern();
@@ -256,6 +258,9 @@
       Mousetrap.bind('f', () => {
         toggleOption('#format');
         updatePattern();
+      })
+      Mousetrap.bind('enter', () => {
+        savePattern();
       })
     });
 
@@ -311,7 +316,28 @@
       let format = $("#format").val();
       let variable = $("#variable").val() || "IMAGE";
       let pattern = buildPattern();
+      let codeOutput;
 
+      if (format == "byte"){
+        codeOutput = `const byte ${variable}[]`;
+        codeOutput += ` = {${rotatePattern(formatByte(pattern))}};`;
+
+      } else if (format == "uint64_t") {
+        codeOutput = `const uint64_t ${variable}`;
+        if (savedPatterns.length > 0){
+          let listPatterns = JSON.parse(JSON.stringify(savedPatterns));
+          listPatterns.push(pattern);
+          listPatterns = listPatterns.map(p => { return formatUint64_t(rotatePattern(p, orientation))} );
+          codeOutput += `[] = {${listPatterns.join()}};`;
+        } else {
+          codeOutput += ` = ${formatUint64_t(rotatePattern(pattern, orientation))};`;
+        }
+      }
+
+      $(".pattern").text(codeOutput);
+    }
+
+    var rotatePattern = (pattern, orientation) => {
       if(orientation == "90-deg"){
         pattern = rotate90(pattern);
       } else if(orientation == "180-deg"){
@@ -321,23 +347,24 @@
       } else {
         pattern = pattern.reverse();
       }
-
-      if (format == "byte"){
-        pattern = pattern.map(row => {
-          return "B"+row.join("")
-        });
-        pattern = `const byte ${variable}[] = {${pattern}};`
-
-      } else if (format == "uint64_t") {
-        pattern = pattern.map(row => {
-          return parseInt(row.join(""), 2).toString(16).padStart(2, '0');
-        });
-        pattern = pattern.join("");
-        pattern = `const uint64_t ${variable} = 0x${pattern};`
-      }
-
-      $(".pattern").text(pattern);
+      return pattern;
     }
+
+    var formatUint64_t = (pattern) =>{
+      pattern = pattern.map(row => {
+        return parseInt(row.join(""), 2).toString(16).padStart(2, '0');
+      });
+      pattern = "0x"+pattern.join("");
+      return pattern;
+    }
+
+    var formatByte = (pattern) => {
+      pattern = pattern.map(row => {
+        return "B"+row.join("")
+      });
+      return pattern;
+    }
+
 
     var invertPattern = () => {
       $(".dot").toggleClass("red");
@@ -349,12 +376,13 @@
       updatePattern();
     }
 
-    var loadPattern = (pattern) => {
+    var loadPattern = (pattern, target) => {
+      target = target || "#main";
       clearPattern();
       for (i = 0; i<8; i++){
         for(j=0; j<8; j++){
           if (pattern[i][j] == 1){
-            $(`[row=${i}] > [col=${j}]`).addClass("red");
+            $(`${target} > [row=${i}] > [col=${j}]`).addClass("red");
           }
         }
       }
@@ -404,6 +432,12 @@
       $(".dotone").removeClass("dotone");
       let value = $("#orientation").val();
       $("#"+value).addClass("dotone");
+      updatePattern();
+    }
+
+    var savePattern = (pattern) => {
+      pattern = pattern || buildPattern();
+      savedPatterns.push(pattern);
       updatePattern();
     }
     </script>
