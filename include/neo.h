@@ -1,5 +1,7 @@
 #include "Adafruit_NeoPixel.h"
 #define NEO_PIN 11
+#define DEFAULT_PIXEL_MODE 0
+
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(4, NEO_PIN, NEO_GRB + NEO_KHZ800);
 uint8_t rainbowCount = 0;
 uint8_t pixelMode = 1;
@@ -41,7 +43,8 @@ void rainbow(){
     break;
 
     default:
-      pixelMode = 1;
+      pixelMode = DEFAULT_PIXEL_MODE;
+    break;
   }
 
   strip.show();
