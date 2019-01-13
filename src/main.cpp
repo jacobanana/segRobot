@@ -12,8 +12,9 @@
 // #define _5011BS_ // 1 digit
 
 #include "Arduino.h"
-#include "segment.h"
-#include "neo.h"
+#include "dotmatrix.h"
+#include "segment.h" // segment display
+#include "neo.h" // neopixel
 
 #define N_EYES 4
 #define N_MOUTH 4
@@ -32,7 +33,7 @@ uint8_t mouths[N_MOUTH][2] ={
 
 uint8_t e1, e2, m, speed;
 uint16_t t1, t2;
-long now1, now2;
+long now1, now2, now3;
 
 void randomEyes(){
   e1 = random() % N_EYES;
@@ -63,14 +64,23 @@ void drawMouth(){
 void setup(){
   setupDisplay(0);
   setupPixels(255);
+  setupDots();
 
   randomMouth();
   randomEyes();
-  speed = 10;
+  speed = 250;
 }
 
 void loop(){
-  rainbow();
+  matrix(3, BODY);
+  //matrix(2, LEGS);
+  //matrix(2, P180);
+  //matrix(3, P270);
+
+  if (millis()-now3 >= speed){
+    rainbow();
+    now3 = millis();
+  }
 
   if (millis()-now1 >= t1){
     drawEyes();
@@ -80,5 +90,5 @@ void loop(){
     drawMouth();
   }
 
-  delay(speed);
+  delay(1);
 }

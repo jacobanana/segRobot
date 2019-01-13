@@ -4,7 +4,7 @@
  * ------
  * characters.h generator
  * ------
- * usage: python scripts/char.py > include/characters.h
+ * usage: python scripts/segmentChar.py > include/characters.h
 """
 
 A = 1

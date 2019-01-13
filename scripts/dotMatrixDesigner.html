@@ -1,0 +1,302 @@
+<html>
+  <head>
+
+  <!-- bootstrap css -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+  <!-- dot matrix css -->
+  <style>
+    .matrix{
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      background-color: #000000;
+    }
+    .matrixRow {
+      display: flex;
+      margin: auto;
+      align-items: baseline;
+    }
+    .dot {
+      height: 55px;
+      width: 55px;
+      border-radius: 50%;
+      display: inline-block;
+      margin: 2px;
+      background-color: #FFFFFF;
+    }
+    .red {
+      background-color: #FF0000;
+    }
+
+    .dotone {
+      border: solid 6px blue;
+    }
+  </style>
+
+  <!-- jQuery & bootstrap javascript -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+  </head>
+
+  <body>
+
+
+    <div class="container">
+      <header>
+        <h1>Dot Matrix Designer</h1>
+      </header>
+      <main class="main">
+        <div class="content">
+
+          <div class="matrix">
+            <div class="matrixRow" row="0">
+              <span class="dot dotone" id="0-deg" col="0"></span>
+              <span class="dot" col="1"></span>
+              <span class="dot" col="2"></span>
+              <span class="dot" col="3"></span>
+              <span class="dot" col="4"></span>
+              <span class="dot" col="5"></span>
+              <span class="dot" col="6"></span>
+              <span class="dot" id="90-deg" col="7"></span>
+            </div>
+
+            <div class="matrixRow" row="2">
+              <span class="dot" col="0"></span>
+              <span class="dot" col="1"></span>
+              <span class="dot" col="2"></span>
+              <span class="dot" col="3"></span>
+              <span class="dot" col="4"></span>
+              <span class="dot" col="5"></span>
+              <span class="dot" col="6"></span>
+              <span class="dot" col="7"></span>
+            </div>
+
+            <div class="matrixRow" row="3">
+              <span class="dot" col="0"></span>
+              <span class="dot" col="1"></span>
+              <span class="dot" col="2"></span>
+              <span class="dot" col="3"></span>
+              <span class="dot" col="4"></span>
+              <span class="dot" col="5"></span>
+              <span class="dot" col="6"></span>
+              <span class="dot" col="7"></span>
+            </div>
+
+            <div class="matrixRow" row="1">
+              <span class="dot" col="0"></span>
+              <span class="dot" col="1"></span>
+              <span class="dot" col="2"></span>
+              <span class="dot" col="3"></span>
+              <span class="dot" col="4"></span>
+              <span class="dot" col="5"></span>
+              <span class="dot" col="6"></span>
+              <span class="dot" col="7"></span>
+            </div>
+
+            <div class="matrixRow" row="4">
+              <span class="dot" col="0"></span>
+              <span class="dot" col="1"></span>
+              <span class="dot" col="2"></span>
+              <span class="dot" col="3"></span>
+              <span class="dot" col="4"></span>
+              <span class="dot" col="5"></span>
+              <span class="dot" col="6"></span>
+              <span class="dot" col="7"></span>
+            </div>
+
+            <div class="matrixRow" row="5">
+              <span class="dot" col="0"></span>
+              <span class="dot" col="1"></span>
+              <span class="dot" col="2"></span>
+              <span class="dot" col="3"></span>
+              <span class="dot" col="4"></span>
+              <span class="dot" col="5"></span>
+              <span class="dot" col="6"></span>
+              <span class="dot" col="7"></span>
+            </div>
+
+            <div class="matrixRow" row="6">
+              <span class="dot" col="0"></span>
+              <span class="dot" col="1"></span>
+              <span class="dot" col="2"></span>
+              <span class="dot" col="3"></span>
+              <span class="dot" col="4"></span>
+              <span class="dot" col="5"></span>
+              <span class="dot" col="6"></span>
+              <span class="dot" col="7"></span>
+            </div>
+
+            <div class="matrixRow" row="7">
+              <span class="dot" col="0" id="270-deg"></span>
+              <span class="dot" col="1"></span>
+              <span class="dot" col="2"></span>
+              <span class="dot" col="3"></span>
+              <span class="dot" col="4"></span>
+              <span class="dot" col="5"></span>
+              <span class="dot" col="6"></span>
+              <span class="dot" col="7" id="180-deg"></span>
+            </div>
+
+          </div>
+
+        </div>
+        <div class="pattern">
+        </div>
+
+
+      </main>
+      <footer>
+        <div class="row">
+          <div class="form-check form-check-inline">
+            <select class="custom-select custom-select-sm" id="orientation">
+              <option value="0-deg" selected>0 degree</option>
+              <option value="90-deg">90 degree</option>
+              <option value="180-deg">180 degree</option>
+              <option value="270-deg">270 degree</option>
+            </select>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <select class="custom-select custom-select-sm" id="format">
+              <option value="uint64_t" selected>uint64_t</option>
+              <option value="byte">byte array</option>
+            </select>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <button class="btn btn-sm btn-primary" id="invert">Invert</button>
+          </div>
+          <div class="form-check form-check-inline">
+            <button class="btn btn-sm btn-primary" id="clear">Clear</button>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+    $().button('toggle')
+
+    $(function(){
+      updatePattern();
+
+      let down = false;
+      $(document).mousedown(function() {
+          down = true;
+      }).mouseup(function() {
+          down = false;
+      });
+
+      $(".dot").on('pointerdown', (event) => {
+        $(event.currentTarget).toggleClass( "red" );
+        updatePattern();
+      }).on('pointerenter', (event) => {
+        if(down === true){
+          $( event.currentTarget ).toggleClass( "red" );
+          updatePattern();
+        }
+      })
+
+      $("#orientation").change(() => {
+        $(".dotone").removeClass("dotone");
+        let value = $("#orientation").val();
+        $("#"+value).addClass("dotone");
+      })
+      $("select").change(() => {
+        updatePattern();
+      })
+
+      $("#invert").click(() => { invertPattern(); })
+      $("#clear").click(() => { clearPattern(); })
+    });
+
+    var rotate90 = function(matrix) {
+     // reverse the rows
+      matrix = matrix.reverse();
+
+      // swap the symmetric elements
+      for (var i = 0; i < matrix.length; i++) {
+        for (var j = 0; j < i; j++) {
+          var temp = matrix[i][j];
+          matrix[i][j] = matrix[j][i];
+          matrix[j][i] = temp;
+        }
+      }
+      return matrix;
+    };
+
+    var rotate180 = function(matrix){
+      matrix = matrix.map(row => { row.reverse(); return row; })
+      matrix.reverse();
+      return matrix;
+    }
+
+    var rotate270 = function(matrix) {
+      return rotate180(rotate90(matrix));
+    };
+
+    var buildPattern = function(){
+      let pattern = [];
+      let line = [];
+      $(".dot").each(function(i, e){
+        let status = $(this).hasClass("red") ? 1 : 0;
+        line.push(status);
+        if (line.length == 8){
+          pattern.push(line);
+          line = [];
+        }
+      })
+      return pattern.reverse();
+    }
+
+    var updatePattern = function(){
+      let orientation = $("#orientation").val();
+      let format = $("#format").val();
+      let variable = $("#variable").val() || "IMAGE";
+      let pattern = buildPattern();
+
+      if(orientation == "90-deg"){
+        pattern = rotate90(pattern);
+      } else if(orientation == "180-deg"){
+        pattern = rotate180(pattern);
+      } else if(orientation == "270-deg"){
+        pattern = rotate270(pattern);
+      }
+
+      if (format == "byte"){
+        pattern = pattern.map(row => {
+          return "B"+row.join("")
+        });
+        pattern = `byte ${variable}[] = {${pattern}};`
+
+      } else if (format == "uint64_t") {
+        pattern = pattern.map(row => {
+          return parseInt(row.join(""), 2).toString(16).padStart(2, '0');
+        });
+        pattern = pattern.join("");
+        pattern = `uint64_t ${variable} = 0x${pattern};`
+      }
+
+      $(".pattern").text(pattern);
+    }
+
+    function invertPattern(){
+      $(".dot").each(function(i, e){
+        $(this).toggleClass("red");
+      })
+      updatePattern();
+    }
+
+    function clearPattern(){
+      $(".red").each(function(i, e){
+        $(this).removeClass("red");
+      })
+      updatePattern();
+    }
+    </script>
+
+  </body>
+</html>
